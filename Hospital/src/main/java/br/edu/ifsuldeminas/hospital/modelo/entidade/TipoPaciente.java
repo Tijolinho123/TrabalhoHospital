@@ -4,8 +4,6 @@
  */
 package br.edu.ifsuldeminas.hospital.modelo.entidade;
 
-import java.util.Objects;
-
 /**
  *
  * @author 15843968650
