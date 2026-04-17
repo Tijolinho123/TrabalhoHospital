@@ -8,13 +8,13 @@ package br.edu.ifsuldeminas.hospital.modelo.entidade;
  *
  * @author 13711880681
  */
-public class cargos {
+public class Cargos {
     private int codCargos;
     private String nomeCargos;
     private float salarioInicial;
     private String atribuicoes;
 
-     public cargos() {
+     public Cargos() {
     }
     
     public int getCodCargos() {
@@ -67,7 +67,7 @@ public class cargos {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final cargos other = (cargos) obj;
+        final Cargos other = (Cargos) obj;
         return this.codCargos == other.codCargos;
     }
 
