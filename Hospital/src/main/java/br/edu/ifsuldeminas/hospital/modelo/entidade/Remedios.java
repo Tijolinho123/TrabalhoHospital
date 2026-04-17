@@ -13,6 +13,9 @@ public class Remedios {
     private String nomeRemedio;
     private String laboratorio;
     private String efeitosColaterais;
+    
+    public Remedios() {
+    }
 
     public int getCodRemedio() {
         return codRemedio;

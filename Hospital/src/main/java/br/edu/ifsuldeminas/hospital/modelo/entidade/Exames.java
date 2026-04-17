@@ -14,6 +14,9 @@ public class Exames {
     private String descricao;
     private double valor;
     private String preparo;
+    
+    public Exames() {
+    }
 
     public int getCodExame() {
         return codExame;
