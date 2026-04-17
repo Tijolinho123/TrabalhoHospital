@@ -10,11 +10,11 @@ import java.util.Objects;
  *
  * @author 15843968650
  */
-public class tipoPaciente {
+public class TipoPaciente {
 	private int codPaciente;
 	private String nomeTipoPaciente;
 
-	public tipoPaciente() {
+	public TipoPaciente() {
 	}
 
 	public int getCodPaciente() {
@@ -51,7 +51,7 @@ public class tipoPaciente {
 		if (getClass() != obj.getClass()) {
 			return false;
 		}
-		final tipoPaciente other = (tipoPaciente) obj;
+		final TipoPaciente other = (TipoPaciente) obj;
 		return this.codPaciente == other.codPaciente;
 	}
 
