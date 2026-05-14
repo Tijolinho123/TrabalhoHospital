@@ -25,7 +25,7 @@ public class ConnectionFactory {
     
     //Constantes requeridas para conexão
     //Constants required for connection
-    private static final String DB_URL = "jdbc:mysql://localhost:3307/bdestudo?useSSL=false";
+    private static final String DB_URL = "jdbc:mysql://localhost:3306/hospital_pedrodebora?useSSL=false";
     private static final String DB_DRIVER = "com.mysql.cj.jdbc.Driver";
     private static final String DB_USER = "root";
     private static final String DB_PASSWD = "1234";
