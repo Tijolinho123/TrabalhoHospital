@@ -2,7 +2,7 @@
 <nav>
     <ul>
         <li><a href="${pageContext.request.contextPath}/index.jsp">HOME</a></li>
-        <li><a href="${pageContext.request.contextPath}${URL_BASE}/Convenioscontrolador?opcao=cancelar">Convenios</a></li>
+        <li><a href="${pageContext.request.contextPath}/${URL_BASE}/Convenioscontrolador?opcao=cancelar">Convenios</a></li>
         <li><a href="${pageContext.request.contextPath}${URL_BASE}/Equipamentoscontrolador?opcao=cancelar">Equipamentos</a></li>
         <li><a href="${pageContext.request.contextPath}${URL_BASE}/Examescontrolador?opcao=cancelar">Exames</a></li>
         <li><a href="${pageContext.request.contextPath}${URL_BASE}/Remedioscontrolador?opcao=cancelar">Remedios</a></li>

@@ -9,7 +9,6 @@ package br.edu.ifsuldeminas.hospital.servico;
  * @author tulio
  */
 public class WebConstante {
-      public static final String BASE_PATH = "/br/edu/ifsuldeminas/pedrograciano/controlador";
-
+  public static final String BASE_PATH = "/br/edu/ifsuldeminas/hospital/controlador";
 
 }

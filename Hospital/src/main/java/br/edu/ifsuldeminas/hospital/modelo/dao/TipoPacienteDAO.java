@@ -16,27 +16,27 @@ import java.util.List;
 public class TipoPacienteDAO extends GenericoDAO<TipoPaciente> {
 
   public void salvar(TipoPaciente objTipoPaciente) {
-    String sql = "INSERT INTO TIPO_PACIENTE(NOME) VALUES(?)";
+    String sql = "INSERT INTO tbl_TipoPaciente(NOME) VALUES(?)";
     save(sql, objTipoPaciente.getNomeTipoPaciente());
   }
 
   public void alterar(TipoPaciente objTipoPaciente) {
-    String sql = "UPDATE TIPO_PACIENTE SET NOME=? WHERE CODIGO=?";
+    String sql = "UPDATE tbl_TipoPaciente SET NOME=? WHERE codTipoPaciente=?";
     save(sql, objTipoPaciente.getNomeTipoPaciente(), objTipoPaciente.getCodPaciente());
   }
 
   public void excluir(TipoPaciente objTipoPaciente) {
-    String sql = "DELETE FROM TIPO_PACIENTE WHERE CODIGO=?";
+    String sql = "DELETE FROM tbl_TipoPaciente WHERE codTipoPaciente=?";
     save(sql, objTipoPaciente.getCodPaciente());
   }
 
   public TipoPaciente buscarPorTipoPacientePorId(int id) {
-    String sql = "SELECT * FROM TIPO_PACIENTE WHERE CODIGO=?";
+    String sql = "SELECT * FROM tbl_TipoPaciente WHERE codTipoPaciente=?";
     return buscarPorId(sql, new TipoPacienteRowMapper(), id);
   }
 
   public List<TipoPaciente> buscarTodosTipoPacientes() {
-    String sql = "SELECT * FROM TIPO_PACIENTE";
+    String sql = "SELECT * FROM tbl_TipoPaciente";
     return buscarTodos(sql, new TipoPacienteRowMapper());
   }
 
@@ -45,7 +45,7 @@ public class TipoPacienteDAO extends GenericoDAO<TipoPaciente> {
     @Override
     public TipoPaciente mapRow(ResultSet rs) throws SQLException {
       TipoPaciente objTipoPaciente = new TipoPaciente();
-      objTipoPaciente.setCodPaciente(rs.getInt("CODIGO"));
+      objTipoPaciente.setCodPaciente(rs.getInt("codTipoPaciente"));
       objTipoPaciente.setNomeTipoPaciente(rs.getString("NOME"));
       System.out.println("Mapeando o objeto: " + objTipoPaciente.toString());
       return objTipoPaciente;

@@ -17,7 +17,7 @@ import java.util.List;
 public class ConveniosDAO extends GenericoDAO<Convenios> {
 
   public void salvar(Convenios objConvenios) {
-    String sql = "INSERT INTO CONVENIOS(NOME,CNPJ,TELEFONE,COBERTURA,DATA_INICIO_CONTRATO,DATA_FIM_CONTRATO) VALUES(?,?,?,?,?,?)";
+    String sql = "INSERT INTO tbl_Convenios(nomeConvenio,CNPJ,TelefoneConvenio,COBERTURA,dataInicioContrato,DataFimContrato) VALUES(?,?,?,?,?,?)";
     save(sql, objConvenios.getNomeConvenio(), objConvenios.getCnpj(), objConvenios.getTelefoneConvenio(),
         objConvenios.getCobertura(),
         new java.sql.Date(objConvenios.getDataInicioContrato().getTimeInMillis()),
@@ -25,7 +25,7 @@ public class ConveniosDAO extends GenericoDAO<Convenios> {
   }
 
   public void alterar(Convenios objConvenios) {
-    String sql = "UPDATE CONVENIOS SET NOME=?,CNPJ=?,TELEFONE=?,COBERTURA=?,DATA_INICIO_CONTRATO=?,DATA_FIM_CONTRATO=? WHERE CODIGO=?";
+    String sql = "UPDATE tbl_Convenios SET nomeConvenio=?,CNPJ=?,TelefoneConvenio=?,COBERTURA=?,dataInicioContrato=?,DataFimContrato=? WHERE codConvenio=?";
     save(sql, objConvenios.getNomeConvenio(), objConvenios.getCnpj(), objConvenios.getTelefoneConvenio(),
         objConvenios.getCobertura(),
         new java.sql.Date(objConvenios.getDataInicioContrato().getTimeInMillis()),
@@ -34,17 +34,17 @@ public class ConveniosDAO extends GenericoDAO<Convenios> {
   }
 
   public void excluir(Convenios objConvenios) {
-    String sql = "DELETE FROM CONVENIOS WHERE CODIGO=?";
+    String sql = "DELETE FROM tbl_Convenios WHERE codConvenio=?";
     save(sql, objConvenios.getCodConvenio());
   }
 
   public Convenios buscarPorConveniosPorId(int id) {
-    String sql = "SELECT * FROM CONVENIOS WHERE CODIGO=?";
+    String sql = "SELECT * FROM tbl_Convenios WHERE codConvenio=?";
     return buscarPorId(sql, new ConveniosRowMapper(), id);
   }
 
   public List<Convenios> buscarTodosConvenios() {
-    String sql = "SELECT * FROM CONVENIOS";
+    String sql = "SELECT * FROM tbl_Convenios";
     return buscarTodos(sql, new ConveniosRowMapper());
   }
 
@@ -53,18 +53,18 @@ public class ConveniosDAO extends GenericoDAO<Convenios> {
     @Override
     public Convenios mapRow(ResultSet rs) throws SQLException {
       Convenios objConvenios = new Convenios();
-      objConvenios.setCodConvenio(rs.getInt("CODIGO"));
-      objConvenios.setNomeConvenio(rs.getString("NOME"));
+      objConvenios.setCodConvenio(rs.getInt("codConvenio"));
+      objConvenios.setNomeConvenio(rs.getString("nomeConvenio"));
       objConvenios.setCnpj(rs.getString("CNPJ"));
-      objConvenios.setTelefoneConvenio(rs.getString("TELEFONE"));
+      objConvenios.setTelefoneConvenio(rs.getString("TelefoneConvenio"));
       objConvenios.setCobertura(rs.getString("COBERTURA"));
 
       Calendar dataInicio = Calendar.getInstance();
-      dataInicio.setTime(rs.getDate("DATA_INICIO_CONTRATO"));
+      dataInicio.setTime(rs.getDate("dataInicioContrato"));
       objConvenios.setDataInicioContrato(dataInicio);
 
       Calendar dataFim = Calendar.getInstance();
-      dataFim.setTime(rs.getDate("DATA_FIM_CONTRATO"));
+      dataFim.setTime(rs.getDate("DataFimContrato"));
       objConvenios.setDataFimContrato(dataFim);
 
       System.out.println("Mapeando o objeto: " + objConvenios.toString());
