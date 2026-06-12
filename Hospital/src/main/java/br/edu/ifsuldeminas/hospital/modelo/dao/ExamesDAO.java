@@ -16,28 +16,28 @@ import java.util.List;
 public class ExamesDAO extends GenericoDAO<Exames> {
 
   public void salvar(Exames objExames) {
-    String sql = "INSERT INTO EXAMES(NOME,DESCRICAO,VALOR,PREPARO) VALUES(?,?,?,?)";
+    String sql = "INSERT INTO tbl_Exames(nomeExame,descricao,valor,preparo) VALUES(?,?,?,?)";
     save(sql, objExames.getNomeExame(), objExames.getDescricao(), objExames.getValor(), objExames.getPreparo());
   }
 
   public void alterar(Exames objExames) {
-    String sql = "UPDATE EXAMES SET NOME=?,DESCRICAO=?,VALOR=?,PREPARO=? WHERE CODIGO=?";
+    String sql = "UPDATE tbl_Exames SET nomeExame=?,descricao=?,valor=?,preparo=? WHERE codExame=?";
     save(sql, objExames.getNomeExame(), objExames.getDescricao(), objExames.getValor(), objExames.getPreparo(),
         objExames.getCodExame());
   }
 
   public void excluir(Exames objExames) {
-    String sql = "DELETE FROM EXAMES WHERE CODIGO=?";
+    String sql = "DELETE FROM tbl_Exames WHERE codExame=?";
     save(sql, objExames.getCodExame());
   }
 
   public Exames buscarPorExamesPorId(int id) {
-    String sql = "SELECT * FROM EXAMES WHERE CODIGO=?";
+    String sql = "SELECT * FROM tbl_Exames WHERE codExame=?";
     return buscarPorId(sql, new ExamesRowMapper(), id);
   }
 
   public List<Exames> buscarTodosExames() {
-    String sql = "SELECT * FROM EXAMES";
+    String sql = "SELECT * FROM tbl_Exames";
     return buscarTodos(sql, new ExamesRowMapper());
   }
 
@@ -46,11 +46,11 @@ public class ExamesDAO extends GenericoDAO<Exames> {
     @Override
     public Exames mapRow(ResultSet rs) throws SQLException {
       Exames objExames = new Exames();
-      objExames.setCodExame(rs.getInt("CODIGO"));
-      objExames.setNomeExame(rs.getString("NOME"));
-      objExames.setDescricao(rs.getString("DESCRICAO"));
-      objExames.setValor(rs.getDouble("VALOR"));
-      objExames.setPreparo(rs.getString("PREPARO"));
+      objExames.setCodExame(rs.getInt("codExame"));
+      objExames.setNomeExame(rs.getString("nomeExame"));
+      objExames.setDescricao(rs.getString("descricao"));
+      objExames.setValor(rs.getDouble("valor"));
+      objExames.setPreparo(rs.getString("preparo"));
       System.out.println("Mapeando o objeto: " + objExames.toString());
       return objExames;
     }

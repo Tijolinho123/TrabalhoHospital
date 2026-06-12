@@ -21,7 +21,7 @@ import java.util.List;
  * @author Tulio Dias
  */
 @WebServlet(WebConstante.BASE_PATH + "/RemediosControlador")
-public class Remedioscontrolador extends HttpServlet {
+public class RemediosControlador extends HttpServlet {
 
   String codigoRemedio = "", nomeRemedio = "", laboratorio = "", efeitosColaterais = "";
   Remedios objRemedios;

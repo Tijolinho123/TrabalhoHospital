@@ -16,27 +16,27 @@ import java.util.List;
 public class SalasDAO extends GenericoDAO<Salas> {
 
   public void salvar(Salas objSalas) {
-    String sql = "INSERT INTO SALAS(NOME,SETOR) VALUES(?,?)";
+    String sql = "INSERT INTO tbl_Salas(nomeSala,setor) VALUES(?,?)";
     save(sql, objSalas.getNomeSala(), objSalas.getSetor());
   }
 
   public void alterar(Salas objSalas) {
-    String sql = "UPDATE SALAS SET NOME=?,SETOR=? WHERE CODIGO=?";
+    String sql = "UPDATE tbl_Salas SET nomeSala=?,setor=? WHERE codSala=?";
     save(sql, objSalas.getNomeSala(), objSalas.getSetor(), objSalas.getCodSala());
   }
 
   public void excluir(Salas objSalas) {
-    String sql = "DELETE FROM SALAS WHERE CODIGO=?";
+    String sql = "DELETE FROM tbl_Salas WHERE codSala=?";
     save(sql, objSalas.getCodSala());
   }
 
   public Salas buscarPorSalasPorId(int id) {
-    String sql = "SELECT * FROM SALAS WHERE CODIGO=?";
+    String sql = "SELECT * FROM tbl_Salas WHERE codSala=?";
     return buscarPorId(sql, new SalasRowMapper(), id);
   }
 
   public List<Salas> buscarTodasSalas() {
-    String sql = "SELECT * FROM SALAS";
+    String sql = "SELECT * FROM tbl_Salas";
     return buscarTodos(sql, new SalasRowMapper());
   }
 
@@ -45,9 +45,9 @@ public class SalasDAO extends GenericoDAO<Salas> {
     @Override
     public Salas mapRow(ResultSet rs) throws SQLException {
       Salas objSalas = new Salas();
-      objSalas.setCodSala(rs.getInt("CODIGO"));
-      objSalas.setNomeSala(rs.getString("NOME"));
-      objSalas.setSetor(rs.getString("SETOR"));
+      objSalas.setCodSala(rs.getInt("codSala"));
+      objSalas.setNomeSala(rs.getString("nomeSala"));
+      objSalas.setSetor(rs.getString("setor"));
       System.out.println("Mapeando o objeto: " + objSalas.toString());
       return objSalas;
     }

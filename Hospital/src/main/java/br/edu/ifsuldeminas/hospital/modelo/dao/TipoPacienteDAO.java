@@ -16,12 +16,12 @@ import java.util.List;
 public class TipoPacienteDAO extends GenericoDAO<TipoPaciente> {
 
   public void salvar(TipoPaciente objTipoPaciente) {
-    String sql = "INSERT INTO tbl_TipoPaciente(NOME) VALUES(?)";
+    String sql = "INSERT INTO tbl_TipoPaciente(nomeTipoPaciente) VALUES(?)";
     save(sql, objTipoPaciente.getNomeTipoPaciente());
   }
 
   public void alterar(TipoPaciente objTipoPaciente) {
-    String sql = "UPDATE tbl_TipoPaciente SET NOME=? WHERE codTipoPaciente=?";
+    String sql = "UPDATE tbl_TipoPaciente SET nomeTipoPaciente=? WHERE codTipoPaciente=?";
     save(sql, objTipoPaciente.getNomeTipoPaciente(), objTipoPaciente.getCodPaciente());
   }
 
@@ -46,7 +46,7 @@ public class TipoPacienteDAO extends GenericoDAO<TipoPaciente> {
     public TipoPaciente mapRow(ResultSet rs) throws SQLException {
       TipoPaciente objTipoPaciente = new TipoPaciente();
       objTipoPaciente.setCodPaciente(rs.getInt("codTipoPaciente"));
-      objTipoPaciente.setNomeTipoPaciente(rs.getString("NOME"));
+      objTipoPaciente.setNomeTipoPaciente(rs.getString("nomeTipoPaciente"));
       System.out.println("Mapeando o objeto: " + objTipoPaciente.toString());
       return objTipoPaciente;
     }

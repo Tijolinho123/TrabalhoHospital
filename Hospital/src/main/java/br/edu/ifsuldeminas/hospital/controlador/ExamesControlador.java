@@ -4,8 +4,8 @@
  */
 package br.edu.ifsuldeminas.hospital.controlador;
 
-import br.edu.ifsuldeminas.hospital.modelo.dao.SalasDAO;
-import br.edu.ifsuldeminas.hospital.modelo.entidade.Salas;
+import br.edu.ifsuldeminas.hospital.modelo.dao.ExamesDAO;
+import br.edu.ifsuldeminas.hospital.modelo.entidade.Exames;
 import br.edu.ifsuldeminas.hospital.servico.WebConstante;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -20,17 +20,17 @@ import java.util.List;
  *
  * @author Tulio Dias
  */
-@WebServlet(WebConstante.BASE_PATH + "/SalasControlador")
-public class Salascontrolador extends HttpServlet {
+@WebServlet(WebConstante.BASE_PATH + "/ExamesControlador")
+public class ExamesControlador extends HttpServlet {
 
-  String codigoSala = "", nomeSala = "", setor = "";
-  Salas objSalas;
-  SalasDAO objSalasDAO;
+  String codigoExame = "", nomeExame = "", descricao = "", valor = "", preparo = "";
+  Exames objExames;
+  ExamesDAO objExamesDAO;
 
   @Override
   public void init() throws ServletException {
-    objSalas = new Salas();
-    objSalasDAO = new SalasDAO();
+    objExames = new Exames();
+    objExamesDAO = new ExamesDAO();
   }
 
   @Override
@@ -40,9 +40,11 @@ public class Salascontrolador extends HttpServlet {
       if (opcao == null || opcao.isEmpty()) {
         opcao = "cadastrar";
       }
-      codigoSala = request.getParameter("codigoSala");
-      nomeSala = request.getParameter("nomeSala");
-      setor = request.getParameter("setor");
+      codigoExame = request.getParameter("codigoExame");
+      nomeExame = request.getParameter("nomeExame");
+      descricao = request.getParameter("descricao");
+      valor = request.getParameter("valor");
+      preparo = request.getParameter("preparo");
       switch (opcao) {
         case "cadastrar":
           cadastrar(request, response);
@@ -74,67 +76,79 @@ public class Salascontrolador extends HttpServlet {
 
   protected void cadastrar(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-    objSalas.setNomeSala(nomeSala);
-    objSalas.setSetor(setor);
-    objSalasDAO.salvar(objSalas);
-    request.setAttribute("mensagem", "Sala cadastrada com sucesso!");
+    objExames.setNomeExame(nomeExame);
+    objExames.setDescricao(descricao);
+    objExames.setValor(Double.valueOf(valor));
+    objExames.setPreparo(preparo);
+    objExamesDAO.salvar(objExames);
+    request.setAttribute("mensagem", "Exame cadastrado com sucesso!");
     encaminharPagina(request, response);
   }
 
   protected void encaminharPagina(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-    List<Salas> listaSalas = objSalasDAO.buscarTodasSalas();
-    request.setAttribute("listaSalas", listaSalas);
-    RequestDispatcher dispatcher = request.getRequestDispatcher("/CadastroSalas.jsp");
+    List<Exames> listaExames = objExamesDAO.buscarTodosExames();
+    request.setAttribute("listaExames", listaExames);
+    RequestDispatcher dispatcher = request.getRequestDispatcher("/CadastroExames.jsp");
     dispatcher.forward(request, response);
   }
 
   protected void confirmarAlterar(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
     request.setAttribute("opcao", "executarAlterar");
-    request.setAttribute("codigoSala", codigoSala);
-    request.setAttribute("nomeSala", nomeSala);
-    request.setAttribute("setor", setor);
+    request.setAttribute("codigoExame", codigoExame);
+    request.setAttribute("nomeExame", nomeExame);
+    request.setAttribute("descricao", descricao);
+    request.setAttribute("valor", valor);
+    request.setAttribute("preparo", preparo);
     request.setAttribute("mensagem", "Edite os dados e clique no botão Salvar");
     encaminharPagina(request, response);
   }
 
   protected void executarAlterar(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-    objSalas.setCodSala(Integer.valueOf(codigoSala));
-    objSalas.setNomeSala(nomeSala);
-    objSalas.setSetor(setor);
-    objSalasDAO.alterar(objSalas);
-    request.setAttribute("mensagem", "Cadastro da sala alterado com sucesso!");
+    objExames.setCodExame(Integer.valueOf(codigoExame));
+    objExames.setNomeExame(nomeExame);
+    objExames.setDescricao(descricao);
+    objExames.setValor(Double.valueOf(valor));
+    objExames.setPreparo(preparo);
+    objExamesDAO.alterar(objExames);
+    request.setAttribute("mensagem", "Cadastro do exame alterado com sucesso!");
     encaminharPagina(request, response);
   }
 
   protected void confirmarExcluir(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
     request.setAttribute("opcao", "executarExcluir");
-    request.setAttribute("codigoSala", codigoSala);
-    request.setAttribute("nomeSala", nomeSala);
-    request.setAttribute("setor", setor);
+    request.setAttribute("codigoExame", codigoExame);
+    request.setAttribute("nomeExame", nomeExame);
+    request.setAttribute("descricao", descricao);
+    request.setAttribute("valor", valor);
+    request.setAttribute("preparo", preparo);
     request.setAttribute("mensagem", "Clique no botão Salvar para excluir");
     encaminharPagina(request, response);
   }
 
   protected void executarExcluir(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-    objSalas.setCodSala(Integer.valueOf(codigoSala));
-    objSalas.setNomeSala(nomeSala);
-    objSalas.setSetor(setor);
-    objSalasDAO.excluir(objSalas);
-    request.setAttribute("mensagem", "Cadastro da sala excluído com sucesso!");
+    objExames.setCodExame(Integer.valueOf(codigoExame));
+    objExames.setNomeExame(nomeExame);
+    objExames.setDescricao(descricao);
+    objExames.setValor(Double.valueOf(valor));
+    objExames.setPreparo(preparo);
+    objExamesDAO.excluir(objExames);
+    request.setAttribute("mensagem", "Cadastro do exame excluído com sucesso!");
     encaminharPagina(request, response);
   }
 
   protected void cancelar(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
     request.setAttribute("opcao", "cadastrar");
-    request.setAttribute("codigoSala", "0");
-    request.setAttribute("nomeSala", "");
-    request.setAttribute("setor", "");
+    request.setAttribute("codigoExame", "0");
+    request.setAttribute("nomeExame", "");
+    request.setAttribute("descricao", "");
+    request.setAttribute("valor", "");
+    request.setAttribute("preparo", "");
     encaminharPagina(request, response);
   }
 

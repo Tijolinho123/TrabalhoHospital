@@ -4,8 +4,8 @@
  */
 package br.edu.ifsuldeminas.hospital.controlador;
 
-import br.edu.ifsuldeminas.hospital.modelo.dao.TipoPacienteDAO;
-import br.edu.ifsuldeminas.hospital.modelo.entidade.TipoPaciente;
+import br.edu.ifsuldeminas.hospital.modelo.dao.EquipamentosDAO;
+import br.edu.ifsuldeminas.hospital.modelo.entidade.Equipamentos;
 import br.edu.ifsuldeminas.hospital.servico.WebConstante;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -20,17 +20,17 @@ import java.util.List;
  *
  * @author Tulio Dias
  */
-@WebServlet(WebConstante.BASE_PATH + "/TipoPacienteControlador")
-public class Tipopacientecontrolador extends HttpServlet {
+@WebServlet(WebConstante.BASE_PATH + "/EquipamentosControlador")
+public class EquipamentosControlador extends HttpServlet {
 
-  String codigoTipoPaciente = "", nomeTipoPaciente = "";
-  TipoPaciente objTipoPaciente;
-  TipoPacienteDAO objTipoPacienteDAO;
+  String codigoEquipamentos = "", nomeEquipamentos = "";
+  Equipamentos objEquipamentos;
+  EquipamentosDAO objEquipamentosDAO;
 
   @Override
   public void init() throws ServletException {
-    objTipoPaciente = new TipoPaciente();
-    objTipoPacienteDAO = new TipoPacienteDAO();
+    objEquipamentos = new Equipamentos();
+    objEquipamentosDAO = new EquipamentosDAO();
   }
 
   @Override
@@ -40,8 +40,8 @@ public class Tipopacientecontrolador extends HttpServlet {
       if (opcao == null || opcao.isEmpty()) {
         opcao = "cadastrar";
       }
-      codigoTipoPaciente = request.getParameter("codigoTipoPaciente");
-      nomeTipoPaciente = request.getParameter("nomeTipoPaciente");
+      codigoEquipamentos = request.getParameter("codigoEquipamentos");
+      nomeEquipamentos = request.getParameter("nomeEquipamentos");
       switch (opcao) {
         case "cadastrar":
           cadastrar(request, response);
@@ -73,61 +73,61 @@ public class Tipopacientecontrolador extends HttpServlet {
 
   protected void cadastrar(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-    objTipoPaciente.setNomeTipoPaciente(nomeTipoPaciente);
-    objTipoPacienteDAO.salvar(objTipoPaciente);
-    request.setAttribute("mensagem", "Tipo de paciente cadastrado com sucesso!");
+    objEquipamentos.setNomeEquipamentos(nomeEquipamentos);
+    objEquipamentosDAO.salvar(objEquipamentos);
+    request.setAttribute("mensagem", "Equipamento cadastrado com sucesso!");
     encaminharPagina(request, response);
   }
 
   protected void encaminharPagina(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-    List<TipoPaciente> listaTipoPaciente = objTipoPacienteDAO.buscarTodosTipoPacientes();
-    request.setAttribute("listaTipoPaciente", listaTipoPaciente);
-    RequestDispatcher dispatcher = request.getRequestDispatcher("/CadastroTipoPaciente.jsp");
+    List<Equipamentos> listaEquipamentos = objEquipamentosDAO.buscarTodosEquipamentos();
+    request.setAttribute("listaEquipamentos", listaEquipamentos);
+    RequestDispatcher dispatcher = request.getRequestDispatcher("/CadastroEquipamentos.jsp");
     dispatcher.forward(request, response);
   }
 
   protected void confirmarAlterar(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
     request.setAttribute("opcao", "executarAlterar");
-    request.setAttribute("codigoTipoPaciente", codigoTipoPaciente);
-    request.setAttribute("nomeTipoPaciente", nomeTipoPaciente);
+    request.setAttribute("codigoEquipamentos", codigoEquipamentos);
+    request.setAttribute("nomeEquipamentos", nomeEquipamentos);
     request.setAttribute("mensagem", "Edite os dados e clique no botão Salvar");
     encaminharPagina(request, response);
   }
 
   protected void executarAlterar(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-    objTipoPaciente.setCodPaciente(Integer.valueOf(codigoTipoPaciente));
-    objTipoPaciente.setNomeTipoPaciente(nomeTipoPaciente);
-    objTipoPacienteDAO.alterar(objTipoPaciente);
-    request.setAttribute("mensagem", "Cadastro do tipo de paciente alterado com sucesso!");
+    objEquipamentos.setCodEquipamentos(Integer.valueOf(codigoEquipamentos));
+    objEquipamentos.setNomeEquipamentos(nomeEquipamentos);
+    objEquipamentosDAO.alterar(objEquipamentos);
+    request.setAttribute("mensagem", "Cadastro do equipamento alterado com sucesso!");
     encaminharPagina(request, response);
   }
 
   protected void confirmarExcluir(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
     request.setAttribute("opcao", "executarExcluir");
-    request.setAttribute("codigoTipoPaciente", codigoTipoPaciente);
-    request.setAttribute("nomeTipoPaciente", nomeTipoPaciente);
+    request.setAttribute("codigoEquipamentos", codigoEquipamentos);
+    request.setAttribute("nomeEquipamentos", nomeEquipamentos);
     request.setAttribute("mensagem", "Clique no botão Salvar para excluir");
     encaminharPagina(request, response);
   }
 
   protected void executarExcluir(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-    objTipoPaciente.setCodPaciente(Integer.valueOf(codigoTipoPaciente));
-    objTipoPaciente.setNomeTipoPaciente(nomeTipoPaciente);
-    objTipoPacienteDAO.excluir(objTipoPaciente);
-    request.setAttribute("mensagem", "Cadastro do tipo de paciente excluído com sucesso!");
+    objEquipamentos.setCodEquipamentos(Integer.valueOf(codigoEquipamentos));
+    objEquipamentos.setNomeEquipamentos(nomeEquipamentos);
+    objEquipamentosDAO.excluir(objEquipamentos);
+    request.setAttribute("mensagem", "Cadastro do equipamento excluído com sucesso!");
     encaminharPagina(request, response);
   }
 
   protected void cancelar(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
     request.setAttribute("opcao", "cadastrar");
-    request.setAttribute("codigoTipoPaciente", "0");
-    request.setAttribute("nomeTipoPaciente", "");
+    request.setAttribute("codigoEquipamentos", "0");
+    request.setAttribute("nomeEquipamentos", "");
     encaminharPagina(request, response);
   }
 

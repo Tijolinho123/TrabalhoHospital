@@ -17,7 +17,7 @@ import java.util.List;
 public class ConveniosDAO extends GenericoDAO<Convenios> {
 
   public void salvar(Convenios objConvenios) {
-    String sql = "INSERT INTO tbl_Convenios(nomeConvenio,CNPJ,TelefoneConvenio,COBERTURA,dataInicioContrato,DataFimContrato) VALUES(?,?,?,?,?,?)";
+    String sql = "INSERT INTO tbl_Convenios(nomeConvenio,cnpj,telefoneConvenio,cobertura,dataInicioContrato,dataFimContrato) VALUES(?,?,?,?,?,?)";
     save(sql, objConvenios.getNomeConvenio(), objConvenios.getCnpj(), objConvenios.getTelefoneConvenio(),
         objConvenios.getCobertura(),
         new java.sql.Date(objConvenios.getDataInicioContrato().getTimeInMillis()),
@@ -25,7 +25,7 @@ public class ConveniosDAO extends GenericoDAO<Convenios> {
   }
 
   public void alterar(Convenios objConvenios) {
-    String sql = "UPDATE tbl_Convenios SET nomeConvenio=?,CNPJ=?,TelefoneConvenio=?,COBERTURA=?,dataInicioContrato=?,DataFimContrato=? WHERE codConvenio=?";
+    String sql = "UPDATE tbl_Convenios SET nomeConvenio=?,cnpj=?,telefoneConvenio=?,cobertura=?,dataInicioContrato=?,dataFimContrato=? WHERE codConvenio=?";
     save(sql, objConvenios.getNomeConvenio(), objConvenios.getCnpj(), objConvenios.getTelefoneConvenio(),
         objConvenios.getCobertura(),
         new java.sql.Date(objConvenios.getDataInicioContrato().getTimeInMillis()),
@@ -55,16 +55,16 @@ public class ConveniosDAO extends GenericoDAO<Convenios> {
       Convenios objConvenios = new Convenios();
       objConvenios.setCodConvenio(rs.getInt("codConvenio"));
       objConvenios.setNomeConvenio(rs.getString("nomeConvenio"));
-      objConvenios.setCnpj(rs.getString("CNPJ"));
-      objConvenios.setTelefoneConvenio(rs.getString("TelefoneConvenio"));
-      objConvenios.setCobertura(rs.getString("COBERTURA"));
+      objConvenios.setCnpj(rs.getString("cnpj"));
+      objConvenios.setTelefoneConvenio(rs.getString("telefoneConvenio"));
+      objConvenios.setCobertura(rs.getString("cobertura"));
 
       Calendar dataInicio = Calendar.getInstance();
       dataInicio.setTime(rs.getDate("dataInicioContrato"));
       objConvenios.setDataInicioContrato(dataInicio);
 
       Calendar dataFim = Calendar.getInstance();
-      dataFim.setTime(rs.getDate("DataFimContrato"));
+      dataFim.setTime(rs.getDate("dataFimContrato"));
       objConvenios.setDataFimContrato(dataFim);
 
       System.out.println("Mapeando o objeto: " + objConvenios.toString());

@@ -16,27 +16,27 @@ import java.util.List;
 public class EquipamentosDAO extends GenericoDAO<Equipamentos> {
 
   public void salvar(Equipamentos objEquipamentos) {
-    String sql = "INSERT INTO EQUIPAMENTOS(NOME) VALUES(?)";
+    String sql = "INSERT INTO tbl_Equipamentos(nomeEquipamento) VALUES(?)";
     save(sql, objEquipamentos.getNomeEquipamentos());
   }
 
   public void alterar(Equipamentos objEquipamentos) {
-    String sql = "UPDATE EQUIPAMENTOS SET NOME=? WHERE CODIGO=?";
+    String sql = "UPDATE tbl_Equipamentos SET nomeEquipamento=? WHERE codEquipamento=?";
     save(sql, objEquipamentos.getNomeEquipamentos(), objEquipamentos.getCodEquipamentos());
   }
 
   public void excluir(Equipamentos objEquipamentos) {
-    String sql = "DELETE FROM EQUIPAMENTOS WHERE CODIGO=?";
+    String sql = "DELETE FROM tbl_Equipamentos WHERE codEquipamento=?";
     save(sql, objEquipamentos.getCodEquipamentos());
   }
 
   public Equipamentos buscarPorEquipamentosPorId(int id) {
-    String sql = "SELECT * FROM EQUIPAMENTOS WHERE CODIGO=?";
+    String sql = "SELECT * FROM tbl_Equipamentos WHERE codEquipamento=?";
     return buscarPorId(sql, new EquipamentosRowMapper(), id);
   }
 
   public List<Equipamentos> buscarTodosEquipamentos() {
-    String sql = "SELECT * FROM EQUIPAMENTOS";
+    String sql = "SELECT * FROM tbl_Equipamentos";
     return buscarTodos(sql, new EquipamentosRowMapper());
   }
 
@@ -45,8 +45,8 @@ public class EquipamentosDAO extends GenericoDAO<Equipamentos> {
     @Override
     public Equipamentos mapRow(ResultSet rs) throws SQLException {
       Equipamentos objEquipamentos = new Equipamentos();
-      objEquipamentos.setCodEquipamentos(rs.getInt("CODIGO"));
-      objEquipamentos.setNomeEquipamentos(rs.getString("NOME"));
+      objEquipamentos.setCodEquipamentos(rs.getInt("codEquipamento"));
+      objEquipamentos.setNomeEquipamentos(rs.getString("nomeEquipamento"));
       System.out.println("Mapeando o objeto: " + objEquipamentos.toString());
       return objEquipamentos;
     }
